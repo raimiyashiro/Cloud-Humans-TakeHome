@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class ApiException {
+public class ApiError {
     private boolean success;
     private Map<String, String> errors = new HashMap<>();
 }

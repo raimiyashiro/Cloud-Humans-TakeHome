@@ -18,6 +18,7 @@ public class ProDTO {
     @NotBlank(message = "It shouldn't be blank")
     @JsonProperty("education_level")
     private String educationLevel;
+
     @NotNull(message = "It shouldn't be null")
     @JsonProperty("past_experiences")
     private Map<String, Boolean> pastExperiences = new HashMap<>();

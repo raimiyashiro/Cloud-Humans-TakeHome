@@ -13,8 +13,8 @@ public class ApiExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiException handleValidationExceptions(MethodArgumentNotValidException ex) {
-        ApiException exception = new ApiException();
+    public ApiError handleValidationExceptions(MethodArgumentNotValidException ex) {
+        var exception = new ApiError();
 
         ex.getBindingResult().getAllErrors().forEach(
                 err -> {
@@ -22,7 +22,6 @@ public class ApiExceptionHandler {
                     String errorMessage = err.getDefaultMessage();
                     exception.getErrors().put(fieldName, errorMessage);
                 });
-
 
         return exception;
     }

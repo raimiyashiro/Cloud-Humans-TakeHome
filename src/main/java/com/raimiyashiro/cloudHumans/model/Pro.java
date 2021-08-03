@@ -1,5 +1,6 @@
 package com.raimiyashiro.cloudHumans.model;
 
+import com.raimiyashiro.cloudHumans.enums.EducationLevelEnum;
 import com.raimiyashiro.cloudHumans.enums.PastExperiencesEnum;
 import lombok.Data;
 
@@ -15,7 +16,24 @@ public class Pro {
     private InternetTest internetTest;
     private String referralCode;
 
+    public boolean hasValidReferralCode() {
+        return this.getReferralCode() != null;
+    }
+
+    public boolean isUnderAge() {
+        return this.getAge() < 18;
+    }
+
+    public boolean hasEducationLevel(EducationLevelEnum e) {
+        return this.getEducationLevel().equalsIgnoreCase(e.toString());
+    }
+
     public boolean hasExperienceWith(PastExperiencesEnum e) {
         return this.getPastExperiences().getOrDefault(e, false);
+    }
+
+    public boolean hasRequiredInternetSpeed(float valueRequiredInMegaBytes) {
+        return this.getInternetTest().getDownloadSpeed() >= valueRequiredInMegaBytes &&
+                this.getInternetTest().getUploadSpeed() >= valueRequiredInMegaBytes;
     }
 }

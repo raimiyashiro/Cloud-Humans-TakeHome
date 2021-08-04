@@ -34,7 +34,7 @@ public class ProController {
         var pro = mapper.map(proDTO, Pro.class);
 
         List<Project> projects = this.projectDataSource.listAvailableProjects();
-        EligibilityScore score = this.algorithm.evaluatePro(pro, projects);
+        EligibilityScore score = this.algorithm.calculateScore(pro, projects);
 
         return mapper.map(score, EligibilityScoreDTO.class);
     }

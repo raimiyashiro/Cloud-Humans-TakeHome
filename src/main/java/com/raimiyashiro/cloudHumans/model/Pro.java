@@ -13,7 +13,7 @@ public class Pro {
     private String educationLevel;
     private Map<String, Boolean> pastExperiences = new HashMap<>();
     private float writingScore;
-    private InternetTest internetTest;
+    private InternetTest internetTest = new InternetTest();
     private String referralCode;
 
     public boolean hasValidReferralCode() {
@@ -32,8 +32,11 @@ public class Pro {
         return this.getPastExperiences().getOrDefault(e, false);
     }
 
-    public boolean hasRequiredInternetSpeed(float valueRequiredInMegaBytes) {
-        return this.getInternetTest().getDownloadSpeed() >= valueRequiredInMegaBytes &&
-                this.getInternetTest().getUploadSpeed() >= valueRequiredInMegaBytes;
+    public float getInternetDownloadSpeed() {
+        return this.getInternetTest().getDownloadSpeed();
+    }
+
+    public float getInternetUploadSpeed() {
+        return this.getInternetTest().getUploadSpeed();
     }
 }

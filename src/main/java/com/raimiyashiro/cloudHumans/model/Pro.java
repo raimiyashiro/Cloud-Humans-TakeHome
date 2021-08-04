@@ -16,10 +16,6 @@ public class Pro {
     private InternetTest internetTest = new InternetTest();
     private String referralCode;
 
-    public boolean hasValidReferralCode() {
-        return this.getReferralCode() != null;
-    }
-
     public boolean isUnderAge() {
         return this.getAge() < 18;
     }

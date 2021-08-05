@@ -30,6 +30,6 @@ public class ProController {
 
         Evaluation evaluation = this.proService.evaluatePro(pro);
 
-        return null;
+        return mapper.map(evaluation, EvaluationDTO.class);
     }
 }

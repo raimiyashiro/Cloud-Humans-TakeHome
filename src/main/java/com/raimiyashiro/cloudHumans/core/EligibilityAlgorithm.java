@@ -15,24 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class EligibilityAlgorithm {
 
-
-    public Evaluation calculateScore(Pro pro, List<Project> availableProjects) {
-
-        var proScore = this.evaluatePro(pro);
-
-        var eligibleProjects = this.selectEligibleProjects(availableProjects, proScore);
-        var selectedProject = eligibleProjects.isEmpty() ? null : eligibleProjects.get(0).getName();
-
-
-        return Evaluation.builder()
-                .score(proScore)
-                .selectedProject(selectedProject)
-                .eligibleProjects(eligibleProjects.stream().map(Project::getName).collect(Collectors.toList()))
-                .ineligibleProjects(null)
-                .build();
-    }
-
-    public Integer evaluatePro(Pro pro) {
+    public Integer calculateScore(Pro pro) {
         // It could be stored in application-properties, or some KeyVault, etc...
         final var VALID_REFERRAL_TOKEN = "token1234";
 
@@ -81,9 +64,5 @@ public class EligibilityAlgorithm {
         }
 
         return finalScore;
-    }
-
-    public List<Project> selectEligibleProjects(List<Project> availableProjects, Integer proScore) {
-        return null;
     }
 }

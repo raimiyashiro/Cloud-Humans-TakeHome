@@ -1,41 +1,35 @@
 package com.raimiyashiro.cloudHumans.controller;
 
-import com.raimiyashiro.cloudHumans.controller.dto.EligibilityScoreDTO;
+import com.raimiyashiro.cloudHumans.controller.dto.EvaluationDTO;
 import com.raimiyashiro.cloudHumans.controller.dto.ProDTO;
-import com.raimiyashiro.cloudHumans.core.EligibilityAlgorithm;
-import com.raimiyashiro.cloudHumans.data.ProjectDataSource;
-import com.raimiyashiro.cloudHumans.model.EligibilityScore;
+import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
-import com.raimiyashiro.cloudHumans.model.Project;
+import com.raimiyashiro.cloudHumans.service.impl.ProService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pro")
 public class ProController {
 
-    private final EligibilityAlgorithm algorithm;
-    private final ProjectDataSource projectDataSource;
+    private final ProService proService;
 
     @Autowired
-    public ProController(EligibilityAlgorithm algorithm, ProjectDataSource projectDataSource) {
-        this.algorithm = algorithm;
-        this.projectDataSource = projectDataSource;
+    public ProController(ProService proService) {
+        this.proService = proService;
     }
 
     @PostMapping("/score")
     @ResponseBody
-    public EligibilityScoreDTO getScore(@RequestBody @Valid ProDTO proDTO) {
+    public EvaluationDTO getScore(@RequestBody @Valid ProDTO proDTO) {
         var mapper = new ModelMapper();
         var pro = mapper.map(proDTO, Pro.class);
 
-        List<Project> projects = this.projectDataSource.listAvailableProjects();
-        EligibilityScore score = this.algorithm.calculateScore(pro, projects);
+        Evaluation evaluation = this.proService.evaluatePro(pro);
 
-        return mapper.map(score, EligibilityScoreDTO.class);
+        return null;
     }
 }

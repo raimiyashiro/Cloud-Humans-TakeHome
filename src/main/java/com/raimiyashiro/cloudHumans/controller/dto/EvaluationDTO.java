@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class EligibilityScoreDTO {
+public class EvaluationDTO {
     private Integer score;
     @JsonProperty("selected_project")
     private String selectedProject;

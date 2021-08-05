@@ -2,7 +2,7 @@ package com.raimiyashiro.cloudHumans.core;
 
 import com.raimiyashiro.cloudHumans.enums.EducationLevelEnum;
 import com.raimiyashiro.cloudHumans.enums.PastExperiencesEnum;
-import com.raimiyashiro.cloudHumans.model.EligibilityScore;
+import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
 import com.raimiyashiro.cloudHumans.model.Project;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class EligibilityAlgorithm {
 
 
-    public EligibilityScore calculateScore(Pro pro, List<Project> availableProjects) {
+    public Evaluation calculateScore(Pro pro, List<Project> availableProjects) {
 
         var proScore = this.evaluatePro(pro);
 
@@ -24,7 +24,7 @@ public class EligibilityAlgorithm {
         var selectedProject = eligibleProjects.isEmpty() ? null : eligibleProjects.get(0).getName();
 
 
-        return EligibilityScore.builder()
+        return Evaluation.builder()
                 .score(proScore)
                 .selectedProject(selectedProject)
                 .eligibleProjects(eligibleProjects.stream().map(Project::getName).collect(Collectors.toList()))

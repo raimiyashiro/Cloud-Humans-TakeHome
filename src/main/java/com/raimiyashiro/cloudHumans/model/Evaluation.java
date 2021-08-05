@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class EligibilityScore {
+public class Evaluation {
     private Integer score;
     private String selectedProject;
     private List<String> eligibleProjects = new ArrayList<>();

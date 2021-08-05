@@ -22,14 +22,13 @@ public class ProController {
         this.proService = proService;
     }
 
-    @PostMapping("/score")
+    @PostMapping("/evaluate")
     @ResponseBody
     public EvaluationDTO getScore(@RequestBody @Valid ProDTO proDTO) {
         var mapper = new ModelMapper();
         var pro = mapper.map(proDTO, Pro.class);
 
         Evaluation evaluation = this.proService.evaluatePro(pro);
-
         return mapper.map(evaluation, EvaluationDTO.class);
     }
 }

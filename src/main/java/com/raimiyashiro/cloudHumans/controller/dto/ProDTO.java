@@ -15,11 +15,13 @@ public class ProDTO {
     @PositiveOrZero(message = "It should be equal or greater than zero")
     private Integer age;
 
+    @NotNull(message = "It shouldn't be null")
     @NotBlank(message = "It shouldn't be blank")
     @JsonProperty("education_level")
     private String educationLevel;
 
     @NotNull(message = "It shouldn't be null")
+    @NotEmpty(message = "It shouldn't be empty")
     @JsonProperty("past_experiences")
     private Map<String, Boolean> pastExperiences = new HashMap<>();
 

@@ -15,53 +15,70 @@ import java.util.stream.Collectors;
 @Component
 public class EligibilityAlgorithm {
 
-    public Integer calculateScore(Pro pro) {
-        // It could be stored in application-properties, or some KeyVault, etc...
-        final var VALID_REFERRAL_TOKEN = "token1234";
+    public Integer evaluateEducationLevel(Pro pro) {
+        if (pro.hasEducationLevel(EducationLevelEnum.high_school)) {
+            return 1;
+        } else if (pro.hasEducationLevel(EducationLevelEnum.bachelors_degree_or_high)) {
+            return 2;
+        }
+        return 0;
+    }
 
+    public Integer evaluatePastExperiences(Pro pro) {
+        if (pro.hasExperienceWith(PastExperiencesEnum.sales) && pro.hasExperienceWith(PastExperiencesEnum.support)) {
+            return 5;
+        } else if (pro.hasExperienceWith(PastExperiencesEnum.sales) || pro.hasExperienceWith(PastExperiencesEnum.support)) {
+            return 3;
+        }
+
+        return 0;
+    }
+
+    public Integer evaluateInternetSpeed(float speed) {
+        Integer evaluation = 0;
+
+        float highSpeedInternet = 50f;
+        float poorSpeedInternet = 5f;
+
+        if (speed > highSpeedInternet) {
+            evaluation++;
+        } else if (speed < poorSpeedInternet) {
+            evaluation--;
+        }
+
+        return evaluation;
+    }
+
+    public Integer evaluateWritingScore(float score) {
+        if (score < 0.3) {
+            return -1;
+        } else if (score <= 0.7) {
+            return 1;
+        }
+        return 2;
+    }
+
+    public Integer evaluateReferralCode(String referralCode) {
+        // It could be stored in application-properties, or some KeyVault, etc...
+        final var VALID_REFERRAL_CODE = "token1234";
+
+        return VALID_REFERRAL_CODE.equals(referralCode) ? 1 : 0;
+    }
+
+
+    public Integer calculateScore(Pro pro) {
         var finalScore = 0;
 
         if (pro.isUnderAge()) {
             return finalScore;
         }
 
-        if (pro.hasEducationLevel(EducationLevelEnum.high_school)) {
-            finalScore++;
-        } else if (pro.hasEducationLevel(EducationLevelEnum.bachelors_degree_or_high)) {
-            finalScore = finalScore + 2;
-        }
-
-        if (pro.hasExperienceWith(PastExperiencesEnum.sales) && pro.hasExperienceWith(PastExperiencesEnum.support)) {
-            finalScore = finalScore + 5;
-        } else if (pro.hasExperienceWith(PastExperiencesEnum.sales) || pro.hasExperienceWith(PastExperiencesEnum.support)) {
-            finalScore = finalScore + 3;
-        }
-
-        if (pro.getInternetDownloadSpeed() > 50f) {
-            finalScore++;
-        } else if (pro.getInternetDownloadSpeed() < 5f) {
-            finalScore--;
-        }
-
-        if (pro.getInternetUploadSpeed() > 50f) {
-            finalScore++;
-        } else if (pro.getInternetUploadSpeed() < 5f) {
-            finalScore--;
-        }
-
-        if (pro.getWritingScore() < 0.3) {
-            finalScore--;
-
-        } else if (pro.getWritingScore() <= 0.7) {
-            finalScore++;
-
-        } else {
-            finalScore = finalScore + 2;
-        }
-
-        if (pro.getReferralCode().equals(VALID_REFERRAL_TOKEN)) {
-            finalScore++;
-        }
+        finalScore = finalScore + this.evaluateEducationLevel(pro);
+        finalScore = finalScore + this.evaluatePastExperiences(pro);
+        finalScore = finalScore + this.evaluateInternetSpeed(pro.getInternetDownloadSpeed());
+        finalScore = finalScore + this.evaluateInternetSpeed(pro.getInternetUploadSpeed());
+        finalScore = finalScore + this.evaluateWritingScore(pro.getWritingScore());
+        finalScore = finalScore + this.evaluateReferralCode(pro.getReferralCode());
 
         return finalScore;
     }

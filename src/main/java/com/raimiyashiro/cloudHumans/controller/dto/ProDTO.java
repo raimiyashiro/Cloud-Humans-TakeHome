@@ -27,7 +27,7 @@ public class ProDTO {
 
     @NotNull(message = "It shouldn't be null")
     @JsonProperty("internet_test")
-    private InternetTest internetTest;
+    private InternetTestDTO internetTest;
 
     @NotNull(message = "It shouldn't be null")
     @Min(value = 0, message = "It should be greater than zero")

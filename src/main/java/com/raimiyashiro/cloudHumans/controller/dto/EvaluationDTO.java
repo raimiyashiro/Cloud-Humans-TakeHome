@@ -11,10 +11,8 @@ public class EvaluationDTO {
     private Integer score;
     @JsonProperty("selected_project")
     private String selectedProject;
-
     @JsonProperty("eligible_projects")
     private List<String> eligibleProjects = new ArrayList<>();
-
     @JsonProperty("ineligible_projects")
     private List<String> ineligibleProjects = new ArrayList<>();
 }

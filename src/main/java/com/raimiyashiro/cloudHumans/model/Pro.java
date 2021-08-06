@@ -17,7 +17,7 @@ public class Pro {
     private String referralCode;
 
     public boolean isUnderAge() {
-        return this.getAge() < 18;
+        return this.age != null && this.getAge() < 18;
     }
 
     public boolean hasEducationLevel(EducationLevelEnum e) {

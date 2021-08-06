@@ -13,8 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class EligibilityAlgorithmTest {
 
@@ -96,18 +94,96 @@ class EligibilityAlgorithmTest {
     }
 
     @Test
-    void evaluateInternetSpeed() {
+    void evaluatePastExperiences_whenProHasNoExperiences() {
+        Pro pro = new Pro();
+
+        Integer expected = 0;
+        Integer actual = this.algorithm.evaluatePastExperiences(pro);
+        Assertions.assertEquals(expected, this.algorithm.evaluatePastExperiences(pro));
+    }
+
+
+    @Test
+    void evaluateInternetSpeed_whenProHasHighSpeedInternet() {
+        float highSpeedInternet = 51f;
+
+        Integer expected = 1;
+        Integer actual = this.algorithm.evaluateInternetSpeed(highSpeedInternet);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void evaluateInternetSpeed_whenProHasPoorSpeedInternet() {
+        float poorSpeedInternet = 1f;
+
+        Integer expected = -1;
+        Integer actual = this.algorithm.evaluateInternetSpeed(poorSpeedInternet);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void evaluateInternetSpeed_whenProHasAverageInternetSpeed() {
+        float averageSpeed = 50f;
+
+        Integer expected = 0;
+        Integer actual = this.algorithm.evaluateInternetSpeed(averageSpeed);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void evaluateWritingScore() {
+        float poorScore = 0.2f;
+        float averageScoreA = 0.3f;
+        float averageScoreB = 0.7f;
+        float highScore = 0.8f;
+
+        Integer poorScoreEvaluation = -1;
+        Integer averageScoreEvaluation = 1;
+        Integer highScoreEvaluation = 2;
+
+
+        Assertions.assertEquals(poorScoreEvaluation, this.algorithm.evaluateWritingScore(poorScore));
+        Assertions.assertEquals(averageScoreEvaluation, this.algorithm.evaluateWritingScore(averageScoreA));
+        Assertions.assertEquals(averageScoreEvaluation, this.algorithm.evaluateWritingScore(averageScoreB));
+        Assertions.assertEquals(highScoreEvaluation, this.algorithm.evaluateWritingScore(highScore));
+
     }
 
     @Test
     void evaluateReferralCode() {
+        String validReferralCode = "token1234";
+        String invalidReferralCode = "fooB4r";
+
+        Integer validReferralCodeEvaluation = 1;
+        Integer invalidReferralCodeEvaluation = 0;
+
+        Assertions.assertEquals(validReferralCodeEvaluation, this.algorithm.evaluateReferralCode(validReferralCode));
+        Assertions.assertEquals(invalidReferralCodeEvaluation, this.algorithm.evaluateReferralCode(invalidReferralCode));
     }
 
     @Test
-    void calculateScore() {
+    void calculateScore_whenProIsUnderAge() {
+        Pro pro = new Pro();
+        pro.setAge(16);
+
+        Integer expected = 0;
+        Integer actual = this.algorithm.calculateScore(pro);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void calculateScore_whenProIsEligible() {
+        Pro pro = new Pro();
+        Mockito.doReturn(1).when(this.algorithm).evaluateEducationLevel(pro);
+        Mockito.doReturn(1).when(this.algorithm).evaluatePastExperiences(pro);
+        Mockito.doReturn(1).when(this.algorithm).evaluateInternetSpeed(Mockito.anyFloat());
+        Mockito.doReturn(1).when(this.algorithm).evaluateWritingScore(Mockito.anyFloat());
+        Mockito.doReturn(1).when(this.algorithm).evaluateReferralCode(Mockito.any());
+
+        Integer expected = 6; // evaluateInternetSpeed runs either for Download/Upload speed
+        Integer actual = this.algorithm.calculateScore(pro);
+
+        Assertions.assertEquals(expected, actual);
     }
 }

@@ -2,14 +2,9 @@ package com.raimiyashiro.cloudHumans.core;
 
 import com.raimiyashiro.cloudHumans.enums.EducationLevelEnum;
 import com.raimiyashiro.cloudHumans.enums.PastExperiencesEnum;
-import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
-import com.raimiyashiro.cloudHumans.model.Project;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -30,7 +25,6 @@ public class EligibilityAlgorithm {
         } else if (pro.hasExperienceWith(PastExperiencesEnum.sales) || pro.hasExperienceWith(PastExperiencesEnum.support)) {
             return 3;
         }
-
         return 0;
     }
 
@@ -67,19 +61,13 @@ public class EligibilityAlgorithm {
 
 
     public Integer calculateScore(Pro pro) {
-        var finalScore = 0;
-
-        if (pro.isUnderAge()) {
-            return finalScore;
-        }
-
-        finalScore = finalScore + this.evaluateEducationLevel(pro);
-        finalScore = finalScore + this.evaluatePastExperiences(pro);
-        finalScore = finalScore + this.evaluateInternetSpeed(pro.getInternetDownloadSpeed());
-        finalScore = finalScore + this.evaluateInternetSpeed(pro.getInternetUploadSpeed());
-        finalScore = finalScore + this.evaluateWritingScore(pro.getWritingScore());
-        finalScore = finalScore + this.evaluateReferralCode(pro.getReferralCode());
-
-        return finalScore;
+        return pro.isUnderAge() ? 0 : (
+                this.evaluateEducationLevel(pro)
+                        + this.evaluatePastExperiences(pro)
+                        + this.evaluateInternetSpeed(pro.getInternetDownloadSpeed())
+                        + this.evaluateInternetSpeed(pro.getInternetUploadSpeed())
+                        + this.evaluateWritingScore(pro.getWritingScore())
+                        + this.evaluateReferralCode(pro.getReferralCode())
+        );
     }
 }

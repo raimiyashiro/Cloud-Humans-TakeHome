@@ -21,11 +21,11 @@ public class Pro {
     }
 
     public boolean hasEducationLevel(EducationLevelEnum e) {
-        return this.getEducationLevel().equalsIgnoreCase(e.toString());
+        return this.getEducationLevel().equalsIgnoreCase(e.name());
     }
 
     public boolean hasExperienceWith(PastExperiencesEnum e) {
-        return this.getPastExperiences().getOrDefault(e, false);
+        return this.getPastExperiences().getOrDefault(e.name(), false);
     }
 
     public float getInternetDownloadSpeed() {

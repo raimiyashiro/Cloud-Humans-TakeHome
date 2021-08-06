@@ -66,3 +66,18 @@ src/main/java
   repository/ # Just to represent a SQL Data Source
   service/ # Brings everything together :)
 ```
+
+## Relevant Comments about this Project
+
+Taking a look over the code, I think that the best part of it is how clean & maintenable the algorithm's architecture is. When I first designed the methods, I tried to apply some popular best practices that would grant me a readable code. Honestly, if I couldn't reach it, I'm pretty sure that at least I'm almost there.
+
+Now, lets analyse somethings that I'm satisfied to deliver in this project:
+
+1. Well-written Unit Tests (see [EligibilityAlgorithmTest](https://github.com/raimiyashiro/Cloud-Humans-TakeHome/blob/master/src/test/java/com/raimiyashiro/cloudHumans/algorithm/EligibilityAlgorithmTest.java) and [ProServiceTest](https://github.com/raimiyashiro/Cloud-Humans-TakeHome/blob/master/src/test/java/com/raimiyashiro/cloudHumans/service/impl/ProServiceTest.java))
+2. Input Validations (see [ProDTO](https://github.com/raimiyashiro/Cloud-Humans-TakeHome/blob/master/src/main/java/com/raimiyashiro/cloudHumans/dto/ProDTO.java))
+3. The project architecture described previously
+4. This rich documentation! :D
+
+Be welcome to drop a :star2: if you want!
+
+- My e-mail address is -> { :package:	dev.raimiyashiro@gmail.com }

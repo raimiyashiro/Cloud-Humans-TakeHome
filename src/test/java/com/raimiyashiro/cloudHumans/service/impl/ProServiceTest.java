@@ -21,6 +21,7 @@ class ProServiceTest {
     ProjectService projectService;
     @Mock
     EligibilityAlgorithm algorithm;
+
     ProService serviceUnderTests;
 
     @BeforeEach
@@ -52,7 +53,6 @@ class ProServiceTest {
         ));
 
         Evaluation actualEvaluation = this.serviceUnderTests.evaluatePro(new Pro());
-
         Assertions.assertEquals(expectedEvaluation, actualEvaluation);
     }
 }

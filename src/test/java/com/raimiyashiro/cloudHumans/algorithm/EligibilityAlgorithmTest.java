@@ -30,7 +30,6 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 1;
         Integer actual = this.algorithm.evaluateEducationLevel(pro);
-
         Assertions.assertEquals(actual, expected);
     }
 
@@ -41,7 +40,6 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 2;
         Integer actual = this.algorithm.evaluateEducationLevel(pro);
-
         Assertions.assertEquals(actual, expected);
     }
 
@@ -52,7 +50,6 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 0;
         Integer actual = this.algorithm.evaluateEducationLevel(pro);
-
         Assertions.assertEquals(actual, expected);
     }
 
@@ -67,29 +64,26 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 5;
         Integer actual = this.algorithm.evaluatePastExperiences(pro);
-
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void evaluatePastExperiences_whenProHasExperienceWithSalesOrSupport() {
         Pro pro = new Pro();
-        Integer expectedEvaluation = 3;
-
         Map<String, Boolean> experiences = new HashMap<>();
 
         experiences.put(PastExperiencesEnum.sales.name(), Boolean.TRUE);
         pro.setPastExperiences(experiences);
 
+        Integer expectedEvaluation = 3;
         Integer actual = this.algorithm.evaluatePastExperiences(pro);
-
         Assertions.assertEquals(expectedEvaluation, actual);
 
         // Just making sure that it works also with PastExperiencesEnum.Support
         experiences.remove(PastExperiencesEnum.sales.name());
         experiences.put(PastExperiencesEnum.support.name(), Boolean.TRUE);
-        pro.setPastExperiences(experiences);
 
+        pro.setPastExperiences(experiences);
         Assertions.assertEquals(expectedEvaluation, this.algorithm.evaluatePastExperiences(pro));
     }
 
@@ -99,9 +93,8 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 0;
         Integer actual = this.algorithm.evaluatePastExperiences(pro);
-        Assertions.assertEquals(expected, this.algorithm.evaluatePastExperiences(pro));
+        Assertions.assertEquals(expected, actual);
     }
-
 
     @Test
     void evaluateInternetSpeed_whenProHasHighSpeedInternet() {
@@ -141,12 +134,10 @@ class EligibilityAlgorithmTest {
         Integer averageScoreEvaluation = 1;
         Integer highScoreEvaluation = 2;
 
-
         Assertions.assertEquals(poorScoreEvaluation, this.algorithm.evaluateWritingScore(poorScore));
         Assertions.assertEquals(averageScoreEvaluation, this.algorithm.evaluateWritingScore(averageScoreA));
         Assertions.assertEquals(averageScoreEvaluation, this.algorithm.evaluateWritingScore(averageScoreB));
         Assertions.assertEquals(highScoreEvaluation, this.algorithm.evaluateWritingScore(highScore));
-
     }
 
     @Test
@@ -168,7 +159,6 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 0;
         Integer actual = this.algorithm.calculateScore(pro);
-
         Assertions.assertEquals(expected, actual);
     }
 
@@ -183,7 +173,6 @@ class EligibilityAlgorithmTest {
 
         Integer expected = 6; // evaluateInternetSpeed runs either for Download/Upload speed
         Integer actual = this.algorithm.calculateScore(pro);
-
         Assertions.assertEquals(expected, actual);
     }
 }

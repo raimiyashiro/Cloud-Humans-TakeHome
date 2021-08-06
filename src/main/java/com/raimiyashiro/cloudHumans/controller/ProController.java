@@ -24,7 +24,7 @@ public class ProController {
 
     @PostMapping("/evaluate")
     @ResponseBody
-    public EvaluationDTO getScore(@RequestBody @Valid ProDTO proDTO) {
+    public EvaluationDTO evaluate(@RequestBody @Valid ProDTO proDTO) {
         var mapper = new ModelMapper();
         var pro = mapper.map(proDTO, Pro.class);
 

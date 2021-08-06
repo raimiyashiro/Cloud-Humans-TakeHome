@@ -1,6 +1,6 @@
 package com.raimiyashiro.cloudHumans.service.impl;
 
-import com.raimiyashiro.cloudHumans.core.EligibilityAlgorithm;
+import com.raimiyashiro.cloudHumans.algorithm.EligibilityAlgorithm;
 import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
 import com.raimiyashiro.cloudHumans.model.Project;
@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ProServiceTest {

@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
-
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiError handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         var exception = new ApiError();
 
         ex.getBindingResult().getAllErrors().forEach(

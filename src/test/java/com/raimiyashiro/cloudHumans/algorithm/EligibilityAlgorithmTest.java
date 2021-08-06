@@ -1,4 +1,4 @@
-package com.raimiyashiro.cloudHumans.core;
+package com.raimiyashiro.cloudHumans.algorithm;
 
 import com.raimiyashiro.cloudHumans.enums.EducationLevelEnum;
 import com.raimiyashiro.cloudHumans.enums.PastExperiencesEnum;

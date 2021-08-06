@@ -1,7 +1,7 @@
 package com.raimiyashiro.cloudHumans.controller;
 
-import com.raimiyashiro.cloudHumans.controller.dto.EvaluationDTO;
-import com.raimiyashiro.cloudHumans.controller.dto.ProDTO;
+import com.raimiyashiro.cloudHumans.dto.EvaluationDTO;
+import com.raimiyashiro.cloudHumans.dto.ProDTO;
 import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
 import com.raimiyashiro.cloudHumans.service.impl.ProService;

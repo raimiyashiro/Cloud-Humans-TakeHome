@@ -1,6 +1,6 @@
 package com.raimiyashiro.cloudHumans.service.impl;
 
-import com.raimiyashiro.cloudHumans.core.EligibilityAlgorithm;
+import com.raimiyashiro.cloudHumans.algorithm.EligibilityAlgorithm;
 import com.raimiyashiro.cloudHumans.model.Evaluation;
 import com.raimiyashiro.cloudHumans.model.Pro;
 import com.raimiyashiro.cloudHumans.model.Project;

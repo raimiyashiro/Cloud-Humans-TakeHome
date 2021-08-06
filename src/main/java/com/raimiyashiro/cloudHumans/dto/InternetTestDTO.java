@@ -1,4 +1,4 @@
-package com.raimiyashiro.cloudHumans.controller.dto;
+package com.raimiyashiro.cloudHumans.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

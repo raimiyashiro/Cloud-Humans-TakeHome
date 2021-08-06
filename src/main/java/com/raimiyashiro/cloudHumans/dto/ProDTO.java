@@ -1,7 +1,6 @@
-package com.raimiyashiro.cloudHumans.controller.dto;
+package com.raimiyashiro.cloudHumans.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.raimiyashiro.cloudHumans.model.InternetTest;
 import lombok.Data;
 
 import java.util.HashMap;

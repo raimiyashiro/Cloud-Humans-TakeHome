@@ -8,4 +8,8 @@ import lombok.Data;
 public class Project {
     private String name;
     private int requiredScore;
+
+    public boolean isEligible(int score) {
+        return score > this.getRequiredScore();
+    }
 }

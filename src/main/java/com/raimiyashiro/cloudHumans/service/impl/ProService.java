@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,11 +27,12 @@ public class ProService implements IProService {
     @Override
     public Evaluation evaluatePro(Pro pro) {
         Evaluation evaluation = new Evaluation();
-        List<Project> availableProjects = this.projectService.getAvailableProjects();
         evaluation.setScore(this.algorithm.calculateScore(pro));
 
+        List<Project> availableProjects = this.projectService.getAvailableProjects();
+
         List<Project> ineligibleProjects = availableProjects.stream()
-                .filter(project -> project.getRequiredScore() > evaluation.getScore())
+                .filter(project -> !project.isEligible(evaluation.getScore()))
                 .collect(Collectors.toList());
 
         evaluation.setIneligibleProjects(
@@ -42,7 +42,7 @@ public class ProService implements IProService {
         );
 
         List<Project> eligibleProjects = availableProjects.stream()
-                .filter(project -> project.getRequiredScore() <= evaluation.getScore())
+                .filter(project -> project.isEligible(evaluation.getScore()))
                 .sorted(Comparator.comparingInt(Project::getRequiredScore).reversed())
                 .collect(Collectors.toList());
 
@@ -52,9 +52,7 @@ public class ProService implements IProService {
 
         evaluation.setEligibleProjects(
                 eligibleProjects.stream().map(Project::getName)
-                        .filter(name -> !Objects.equals(name, evaluation.getSelectedProject()))
-                        .collect(Collectors.toList())
-        );
+                        .collect(Collectors.toList()));
 
         return evaluation;
     }
